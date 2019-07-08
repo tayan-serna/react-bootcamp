@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Header from './header';
+
 import './index.scss';
 
 const App = () => {
   return (
     <div>
-      <header className="title">
-        <h1>RICK AND MORTY</h1>
-      </header>
+      <Header />
       <section className="container">
         <div className="detail">
           <div className="image-container">
