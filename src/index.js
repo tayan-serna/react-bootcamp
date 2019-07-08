@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Header from './header';
+import CharacterList from './characterList';
 
 import './index.scss';
 
@@ -10,6 +11,7 @@ const App = () => {
     <div>
       <Header />
       <section className="container">
+        <CharacterList />
         <div className="detail">
           <div className="image-container">
             <span role="img" aria-label="back" className="detail__back">
@@ -48,88 +50,6 @@ const App = () => {
               <span className="datail_info">Earth (C-137)</span>
             </div>
           </div>
-        </div>
-        <div className="list-container">
-          <div className="search-container">
-            <input className="search-input" />
-            <span role="img" aria-label="search" className="search-button">
-              🔍
-            </span>
-          </div>
-          <ul className="card-container">
-            <li className="card">
-              <img
-                alt="rick"
-                className="card__image"
-                src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-              />
-              <div className="card__info">Rick Sanchez</div>
-            </li>
-            <li className="card">
-              <img
-                alt="rick"
-                className="card__image"
-                src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-              />
-              <div className="card__info">Rick Sanchez</div>
-            </li>
-            <li className="card">
-              <img
-                alt="rick"
-                className="card__image"
-                src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-              />
-              <div className="card__info">Rick Sanchez</div>
-            </li>
-            <li className="card">
-              <img
-                alt="rick"
-                className="card__image"
-                src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-              />
-              <div className="card__info">Rick Sanchez</div>
-            </li>
-            <li className="card">
-              <img
-                alt="rick"
-                className="card__image"
-                src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-              />
-              <div className="card__info">Rick Sanchez</div>
-            </li>
-            <li className="card">
-              <img
-                alt="rick"
-                className="card__image"
-                src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-              />
-              <div className="card__info">Rick Sanchez</div>
-            </li>
-            <li className="card">
-              <img
-                alt="rick"
-                className="card__image"
-                src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-              />
-              <div className="card__info">Rick Sanchez</div>
-            </li>
-            <li className="card">
-              <img
-                alt="rick"
-                className="card__image"
-                src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-              />
-              <div className="card__info">Rick Sanchez</div>
-            </li>
-            <li className="card">
-              <img
-                alt="rick"
-                className="card__image"
-                src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-              />
-              <div className="card__info">Rick Sanchez</div>
-            </li>
-          </ul>
         </div>
       </section>
     </div>
