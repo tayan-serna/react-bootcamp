@@ -3,11 +3,26 @@ import React, { Component } from 'react';
 import Card from './card';
 
 class CharacterList extends Component {
+  state = {
+    searchValue: ''
+  };
+
+  handleChangeInput = e => {
+    this.setState({
+      searchValue: e.target.value
+    });
+  };
+
   render() {
+    const { searchValue } = this.state;
     return (
       <div className="list-container">
         <div className="search-container">
-          <input className="search-input" />
+          <input
+            className="search-input"
+            value={searchValue}
+            onChange={this.handleChangeInput}
+          />
           <span role="img" aria-label="search" className="search-button">
             🔍
           </span>
