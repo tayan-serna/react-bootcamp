@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Card from './card';
+
 class CharacterList extends Component {
   render() {
     return (
@@ -11,78 +13,29 @@ class CharacterList extends Component {
           </span>
         </div>
         <ul className="card-container">
-          <li className="card">
-            <img
-              alt="rick"
-              className="card__image"
-              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            />
-            <div className="card__info">Rick Sanchez</div>
-          </li>
-          <li className="card">
-            <img
-              alt="rick"
-              className="card__image"
-              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            />
-            <div className="card__info">Rick Sanchez</div>
-          </li>
-          <li className="card">
-            <img
-              alt="rick"
-              className="card__image"
-              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            />
-            <div className="card__info">Rick Sanchez</div>
-          </li>
-          <li className="card">
-            <img
-              alt="rick"
-              className="card__image"
-              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            />
-            <div className="card__info">Rick Sanchez</div>
-          </li>
-          <li className="card">
-            <img
-              alt="rick"
-              className="card__image"
-              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            />
-            <div className="card__info">Rick Sanchez</div>
-          </li>
-          <li className="card">
-            <img
-              alt="rick"
-              className="card__image"
-              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            />
-            <div className="card__info">Rick Sanchez</div>
-          </li>
-          <li className="card">
-            <img
-              alt="rick"
-              className="card__image"
-              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            />
-            <div className="card__info">Rick Sanchez</div>
-          </li>
-          <li className="card">
-            <img
-              alt="rick"
-              className="card__image"
-              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            />
-            <div className="card__info">Rick Sanchez</div>
-          </li>
-          <li className="card">
-            <img
-              alt="rick"
-              className="card__image"
-              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-            />
-            <div className="card__info">Rick Sanchez</div>
-          </li>
+          <Card />
+          <Card
+            name="Morty Smith"
+            src="https://rickandmortyapi.com/api/character/avatar/2.jpeg"
+          />
+          <Card
+            name="Summer Smith"
+            src="https://rickandmortyapi.com/api/character/avatar/3.jpeg"
+          />
+          <Card
+            name="Beth Smith"
+            src="https://rickandmortyapi.com/api/character/avatar/4.jpeg"
+          />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </ul>
       </div>
     );
