@@ -7,9 +7,7 @@ import FavoriteContext from './favoriteContext';
 const RickAndMortyAPI = 'https://rickandmortyapi.com/api/character/';
 
 const Detail = ({ history, match }) => {
-  const [character, setCharacter] = useState({
-    loading: true
-  });
+  const [character, setCharacter] = useState({ loading: true });
   const { favoriteList, setFavoriteList } = useContext(FavoriteContext);
   const [isFavorite, setIsFavorite] = useState(favoriteList[match.params.id]);
 
