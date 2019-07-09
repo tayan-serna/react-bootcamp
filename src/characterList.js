@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import Card from './card';
 
@@ -40,11 +41,9 @@ class CharacterList extends Component {
         </div>
         <ul className="card-container">
           {characters.map(character => (
-            <Card
-              key={character.id}
-              name={character.name}
-              src={character.image}
-            />
+            <Link to={`detail/${character.id}`} key={character.id}>
+              <Card name={character.name} src={character.image} />
+            </Link>
           ))}
         </ul>
       </div>

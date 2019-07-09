@@ -1,10 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Detail = () => {
+const Detail = ({ history }) => {
   return (
     <div className="detail">
       <div className="image-container">
-        <span role="img" aria-label="back" className="detail__back">
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events*/}
+        <span
+          role="img"
+          aria-label="back"
+          className="detail__back"
+          onClick={history.goBack}
+        >
           🔙
         </span>
         <img
@@ -42,6 +49,17 @@ const Detail = () => {
       </div>
     </div>
   );
+};
+
+Detail.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string
+    })
+  }).isRequired,
+  history: PropTypes.shape({
+    goBack: PropTypes.func
+  }).isRequired
 };
 
 export default Detail;
