@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
-const Detail = ({ history }) => {
+const RickAndMortyAPI = 'https://rickandmortyapi.com/api/character/';
+
+const Detail = ({ history, match }) => {
+  const [character, setCharacter] = useState({
+    loading: true
+  });
+
+  useEffect(() => {
+    axios.get(`${RickAndMortyAPI}${match.params.id}`).then(({ data }) => {
+      setCharacter({
+        ...data,
+        loading: false
+      });
+    }, console.error);
+  }, [match.params.id]);
+
+  if (character.loading) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <div className="detail">
       <div className="image-container">
@@ -15,8 +35,8 @@ const Detail = ({ history }) => {
           🔙
         </span>
         <img
-          alt="rick sanchez"
-          src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+          alt={character.name}
+          src={character.image}
           className="detail__image"
         />
         <span role="img" aria-label="star" className="detail__favorite">
@@ -27,24 +47,24 @@ const Detail = ({ history }) => {
         <div className="detail__item">
           <strong className="detail__label">NAME: </strong>{' '}
           <span className="datail_info">
-            Rick Sanchez <span>(Alive)</span>
+            {character.name} <span>({character.status})</span>
           </span>
         </div>
         <div className="detail__item">
           <strong className="detail__label">SPECIE: </strong>{' '}
-          <span className="datail_info">Human</span>
+          <span className="datail_info">{character.species}</span>
         </div>
         <div className="detail__item">
           <strong className="detail__label">TYPE: </strong>{' '}
-          <span className="datail_info">N/A</span>
+          <span className="datail_info">{character.type || 'N/A'}</span>
         </div>
         <div className="detail__item">
           <strong className="detail__label">GENDER: </strong>{' '}
-          <span className="datail_info">Male</span>
+          <span className="datail_info">{character.gender}</span>
         </div>
         <div className="detail__item">
           <strong className="detail__label">LOCATION: </strong>{' '}
-          <span className="datail_info">Earth (C-137)</span>
+          <span className="datail_info">{character.origin.name}</span>
         </div>
       </div>
     </div>
