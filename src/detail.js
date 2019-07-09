@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+
+import FavoriteContext from './favoriteContext';
 
 const RickAndMortyAPI = 'https://rickandmortyapi.com/api/character/';
 
@@ -8,6 +10,8 @@ const Detail = ({ history, match }) => {
   const [character, setCharacter] = useState({
     loading: true
   });
+  const { favoriteList, setFavoriteList } = useContext(FavoriteContext);
+  const [isFavorite, setIsFavorite] = useState(favoriteList[match.params.id]);
 
   useEffect(() => {
     axios.get(`${RickAndMortyAPI}${match.params.id}`).then(({ data }) => {
@@ -36,12 +40,22 @@ const Detail = ({ history, match }) => {
         </span>
         <img
           alt={character.name}
+          onDoubleClick={() => {
+            const isFavoriteCharacter = favoriteList[character.id]
+              ? !favoriteList[character.id]
+              : true;
+            favoriteList[character.id] = isFavoriteCharacter;
+            setIsFavorite(isFavoriteCharacter);
+            setFavoriteList(favoriteList);
+          }}
           src={character.image}
           className="detail__image"
         />
-        <span role="img" aria-label="star" className="detail__favorite">
-          ⭐
-        </span>
+        {isFavorite && (
+          <span role="img" aria-label="star" className="detail__favorite">
+            ⭐
+          </span>
+        )}
       </div>
       <div className="detail__details">
         <div className="detail__item">
