@@ -8,10 +8,6 @@ import Card from './card';
 
 const RickAndMortyAPI = 'https://rickandmortyapi.com/api/character/';
 class CharacterList extends Component {
-  state = {
-    searchValue: this.props.filterValue
-  };
-
   componentDidMount() {
     if (!this.props.characters.length) {
       axios.get(RickAndMortyAPI).then(({ data: { results } }) => {
@@ -28,28 +24,21 @@ class CharacterList extends Component {
     const newFilteredCharacters = this.props.characters.filter(character =>
       character.name.toLowerCase().includes(e.target.value)
     );
-    this.setState(
-      {
-        searchValue: e.target.value
-      },
-      () => {
-        this.props.setFilterObject({
-          filteredCharacters: newFilteredCharacters,
-          filterValue: e.target.value
-        });
-      }
-    );
+
+    this.props.setFilterObject({
+      filteredCharacters: newFilteredCharacters,
+      filterValue: e.target.value
+    });
   };
 
   render() {
     const { filteredCharacters } = this.props;
-    const { searchValue } = this.state;
     return (
       <div className="list-container">
         <div className="search-container">
           <input
             className="search-input"
-            value={searchValue}
+            value={this.props.filterValue}
             onChange={this.handleChangeInput}
           />
           <span role="img" aria-label="search" className="search-button">
