@@ -22,9 +22,8 @@ class CharacterList extends Component {
   handleChangeInput = e => {
     e.persist();
     const newFilteredCharacters = this.props.characters.filter(character =>
-      character.name.toLowerCase().includes(e.target.value)
+      character.name.toLowerCase().includes(e.target.value.toLowerCase())
     );
-
     this.props.setFilterObject({
       filteredCharacters: newFilteredCharacters,
       filterValue: e.target.value
@@ -40,13 +39,14 @@ class CharacterList extends Component {
             className="search-input"
             value={this.props.filterValue}
             onChange={this.handleChangeInput}
+            data-testid="search-input"
           />
           <span role="img" aria-label="search" className="search-button">
             🔍
           </span>
         </div>
         <ul className="card-container">
-          {filteredCharacters.lenght ? (
+          {filteredCharacters.length ? (
             filteredCharacters.map(character => (
               <Link to={`detail/${character.id}`} key={character.id}>
                 <Card name={character.name} src={character.image} />

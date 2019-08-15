@@ -1,6 +1,7 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router';
 import * as axiosMock from 'axios';
-import { render, fireEvent, act, waitForElement } from '@testing-library/react';
+import { render, fireEvent, act } from '@testing-library/react';
 
 import CharacterList from '../characterList';
 import FilterContext from '../filterContext';
@@ -97,9 +98,68 @@ test('should render the card list', async () => {
       </FilterContext.Provider>
     );
   });
-
-  let blankNode = containerUtils.getByText('There is not results');
-  console.log(containerUtils.container.innerHTML);
-  expect(blankNode).toBeTruthy();
   expect(fakeFilterContext.setFilterObject).toHaveBeenCalledTimes(1);
+  expect(fakeFilterContext.setFilterObject).toHaveBeenCalledWith({
+    characters: fakeData.results,
+    filteredCharacters: fakeData.results
+  });
+
+  fakeFilterContext.characters = fakeData.results;
+  fakeFilterContext.filteredCharacters = fakeData.results;
+
+  await act(async () => {
+    containerUtils.rerender(
+      <MemoryRouter initialEntries={['/']}>
+        <FilterContext.Provider value={fakeFilterContext}>
+          <CharacterList />
+        </FilterContext.Provider>
+      </MemoryRouter>
+    );
+  });
+
+  let blankNode = containerUtils.queryByText('There is not results');
+  expect(blankNode).toBeNull();
+
+  let cardNodes = containerUtils.queryAllByTestId('card');
+  expect(cardNodes).toHaveLength(2);
+
+  let inputNode = containerUtils.getByTestId('search-input');
+  const value = 'Mor';
+  fireEvent.change(inputNode, {
+    target: { value }
+  });
+
+  const filteredCharacters = fakeData.results.filter(character =>
+    character.name.toLowerCase().includes(value.toLowerCase())
+  );
+
+  expect(fakeFilterContext.setFilterObject).toHaveBeenCalledTimes(2);
+  expect(fakeFilterContext.setFilterObject).toHaveBeenCalledWith({
+    filteredCharacters,
+    filterValue: value
+  });
+
+  // eslint-disable-next-line require-atomic-updates
+  fakeFilterContext.filteredCharacters = filteredCharacters;
+  // eslint-disable-next-line require-atomic-updates
+  fakeFilterContext.filterValue = value;
+
+  await act(async () => {
+    containerUtils.rerender(
+      <MemoryRouter initialEntries={['/']}>
+        <FilterContext.Provider value={fakeFilterContext}>
+          <CharacterList />
+        </FilterContext.Provider>
+      </MemoryRouter>
+    );
+  });
+
+  blankNode = containerUtils.queryByText('There is not results');
+  expect(blankNode).toBeNull();
+
+  cardNodes = containerUtils.queryAllByTestId('card');
+  expect(cardNodes).toHaveLength(1);
+
+  inputNode = containerUtils.getByTestId('search-input');
+  expect(inputNode.value).toEqual(fakeFilterContext.filterValue);
 });
