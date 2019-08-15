@@ -46,11 +46,15 @@ class CharacterList extends Component {
           </span>
         </div>
         <ul className="card-container">
-          {filteredCharacters.map(character => (
-            <Link to={`detail/${character.id}`} key={character.id}>
-              <Card name={character.name} src={character.image} />
-            </Link>
-          ))}
+          {filteredCharacters.lenght ? (
+            filteredCharacters.map(character => (
+              <Link to={`detail/${character.id}`} key={character.id}>
+                <Card name={character.name} src={character.image} />
+              </Link>
+            ))
+          ) : (
+            <span>There is not results</span>
+          )}
         </ul>
       </div>
     );

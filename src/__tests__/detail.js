@@ -1,7 +1,6 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import * as axiosMock from 'axios';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, act } from '@testing-library/react';
 // import '@testing-library/jest-dom/extend-expect';
 
 import Detail from '../detail';
