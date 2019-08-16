@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import PropTypes from 'prop-types';
 
-const Card = props => {
+interface TProps {
+  src?: string;
+  name?: string;
+}
+
+const Card: FunctionComponent<TProps> = props => {
   return (
     <li data-testid="card" className="card">
       <img
